@@ -13,6 +13,10 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 #
+import requests
+from time import time
+from datetime import datetime
+
 from flask import request
 from flask_login import login_required, current_user
 from api.db.services.llm_service import LLMFactoriesService, TenantLLMService, LLMService
@@ -189,6 +193,33 @@ def list():
             if m["fid"] not in res:
                 res[m["fid"]] = []
             res[m["fid"]].append(m)
+
+        # ------------------------ UnieAI -----------------------
+        res['UnieAI'] = []
+        models = requests.get("https://router.spearlink.seal3.io/v1/models").json()['data']
+        for model in models:
+            worker_addr = requests.post(
+                "https://controller.spearlink.seal3.io/get_worker_address", 
+                json={"model": model["id"]}
+            ).json()['address']
+            
+            max_tokens = requests.post(
+                worker_addr + "/model_details",
+            ).json()['context_length']
+
+            res['UnieAI'].append({
+                "available": True,
+                "create_date": datetime.now().strftime("%a, %d %b %Y %H:%M:%S GMT"),
+                "create_time": int(time() * 1000),
+                "fid": "UnieAI",
+                "llm_name": model["id"],
+                "max_tokens": 512,
+                "model_type": "chat",
+                "status": "1",
+                "tags": "LLM,CHAT",
+                "update_date": datetime.now().strftime("%a, %d %b %Y %H:%M:%S GMT"),
+                "update_time": int(time() * 1000),
+            },)
 
         return get_json_result(data=res)
     except Exception as e:
