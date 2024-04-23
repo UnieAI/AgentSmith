@@ -77,8 +77,8 @@ def set_dialog():
         llm_id = req.get("llm_id", tenant.llm_id)
         if not dialog_id:
             if not req.get("kb_ids"):
-                return get_data_error_result(
-                    retmsg="Fail! Please select knowledgebase!")
+                # todo: add default with our ad kb
+                req["kb_ids"] = [] 
             dia = {
                 "id": get_uuid(),
                 "tenant_id": current_user.id,
