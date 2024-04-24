@@ -280,3 +280,40 @@ def use_sql(question, field_map, tenant_id, chat_mdl, quota=True):
         "reference": {"chunks": [{"doc_id": r[docid_idx], "docnm_kwd": r[docnm_idx]} for r in tbl["rows"]],
                       "doc_aggs": [{"doc_id": did, "doc_name": d["doc_name"], "count": d["count"]} for did, d in doc_aggs.items()]}
     }
+
+
+# similar to chat, but only for retrieval
+def use_retrival(dialog, messages, **kwargs):
+    prompt_config = dialog.prompt_config
+
+    if len(dialog.kb_ids) > 0:
+        kbs = KnowledgebaseService.get_by_ids(dialog.kb_ids)
+
+        embd_nms = list(set([kb.embd_id for kb in kbs]))
+        assert len(embd_nms) == 1, "Knowledge bases use different embedding models."
+
+        questions = [m["content"] for m in messages if m["role"] == "user"]
+        embd_mdl = LLMBundle(dialog.tenant_id, LLMType.EMBEDDING, embd_nms[0])
+
+        for _ in range(len(questions) // 2):
+            questions.append(questions[-1])
+
+        kbinfos = retrievaler.retrieval(" ".join(questions), embd_mdl, dialog.tenant_id, dialog.kb_ids, 1, dialog.top_n,
+                                        dialog.similarity_threshold,
+                                        dialog.vector_similarity_weight, top=1024, aggs=False)
+
+        # remove vector from chunks which is not needed for frontend
+        for c in kbinfos["chunks"]:
+            if c.get("vector"):
+                del c["vector"]
+        
+        knowledges = [ck["content_with_weight"] for ck in kbinfos["chunks"]]
+        chat_logger.info(
+            "{}->{}".format(" ".join(questions), "\n->".join(knowledges)))
+    else:
+        knowledges = []
+
+    return {
+        'knowledge': knowledges,
+        'reference': kbinfos if kbinfos else {}
+    }

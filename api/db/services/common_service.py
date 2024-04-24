@@ -118,6 +118,16 @@ class CommonService:
         except Exception as e:
             return False, None
 
+    # TODO: name is not a geral field, just for test
+    @classmethod
+    @DB.connection_context()
+    def get_by_name(cls, name):
+        try:
+            obj = cls.model.query(name=name)[0]
+            return True, obj
+        except Exception as e:
+            return False, None
+
     @classmethod
     @DB.connection_context()
     def get_by_ids(cls, pids, cols=None):
