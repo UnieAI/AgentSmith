@@ -1,18 +1,22 @@
 .chatWrapper {
   height: 100%;
   width: 100%;
-
   .chatAppWrapper {
     width: 288px;
     padding: 26px;
 
     .chatAppContent {
       overflow-y: auto;
+      height: 100%;
+      overflow-x: hidden;
     }
 
     .chatAppCard {
       :global(.ant-card-body) {
         padding: 10px;
+        width: 320px;
+        height: 120px;
+        margin: 10px ;
       }
       .cubeIcon {
         &:hover {
@@ -22,7 +26,7 @@
     }
     .chatAppCardSelected {
       :global(.ant-card-body) {
-        background-color: @gray11;
+        // background-color: @gray11;
         border-radius: 8px;
       }
     }
@@ -44,7 +48,7 @@
   .chatSpin {
     :global(.ant-spin-container) {
       display: flex;
-      flex-direction: column;
+      flex-direction: row;
       gap: 10px;
     }
   }

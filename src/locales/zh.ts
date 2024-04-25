@@ -84,7 +84,7 @@ export default {
       processBeginAt: '流程开始于',
       processDuration: '过程持续时间',
       progressMsg: '进度消息',
-      testingDescription: '最后一步！ 成功后，剩下的就交给Infiniflow AI吧。',
+      testingDescription: '最后一步！',
       topK: 'Top K',
       topKTip:
         '对于计算成本，并非所有检索到的块都会计算与查询的向量余弦相似度。 Top K越大，召回率越高，检索速度越慢。',

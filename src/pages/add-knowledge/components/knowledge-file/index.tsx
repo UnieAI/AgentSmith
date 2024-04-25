@@ -70,9 +70,10 @@ const KnowledgeFile = () => {
       dataIndex: 'name',
       key: 'name',
       fixed: 'left',
+      width: 300,
       render: (text: any, { id, thumbnail, name }) => (
-        <div className={styles.tochunks} onClick={() => toChunk(id)}>
-          <Flex gap={10} align="center">
+        <div className={styles.tochunks} onClick={() => toChunk(id)}  >
+          <Flex gap={10} align="center" >
             {thumbnail ? (
               <img className={styles.img} src={thumbnail} alt="" />
             ) : (

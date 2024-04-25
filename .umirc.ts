@@ -27,7 +27,7 @@ export default defineConfig({
   devtool: 'source-map',
   proxy: {
     '/v1': {
-      target: 'http://192.168.200.233:9380/',
+      target: 'https://agent-smith.unieai.com/',
       changeOrigin: true,
       // pathRewrite: { '^/v1': '/v1' },
     },

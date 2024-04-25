@@ -32,12 +32,13 @@ import {
   Flex,
   Progress,
   Space,
+  Spin,
   Upload,
   UploadFile,
   UploadProps,
 } from 'antd';
 import classNames from 'classnames';
-import { ReactElement, useCallback, useMemo, useRef, useState } from 'react';
+import { ReactElement, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useNavigate } from 'umi';
 
 import { useTranslate } from '@/hooks/commonHooks';
@@ -65,6 +66,7 @@ const UploaderItem = ({
   handleEdit: (id: string) => void;
 }) => {
   const { removeDocument } = useDeleteDocumentById();
+  const [progress, setProgress] = useState(0);
 
   const documentId = file?.response?.id;
 
@@ -72,7 +74,7 @@ const UploaderItem = ({
     if (file.status === 'error') {
       remove(documentId);
     } else {
-      const ret: any = await removeDocument(documentId);
+      const ret = await removeDocument(documentId);
       if (ret === 0) {
         remove(documentId);
       }
@@ -85,6 +87,23 @@ const UploaderItem = ({
     }
   };
 
+  useEffect(() => {
+    if (file.status === 'uploading') {
+      const timer = setInterval(() => {
+        setProgress((prevProgress) => {
+          if (prevProgress >= 95) {
+            clearInterval(timer);
+            return prevProgress;
+          }
+          return prevProgress + 5;
+        });
+      }, 200);
+      return () => clearInterval(timer);
+    } else if (file.status === 'done') {
+      setProgress(100);
+    }
+  }, [file.status]);
+
   return (
     <Card className={styles.uploaderItem}>
       <Flex justify="space-between">
@@ -96,10 +115,16 @@ const UploaderItem = ({
           <span>{file.size}</span>
         </section>
         {isUpload ? (
-          <DeleteOutlined
-            className={styles.deleteIcon}
-            onClick={handleRemove}
-          />
+          <>
+            {file.status === 'done' ? (
+              <DeleteOutlined
+                className={styles.deleteIcon}
+                onClick={handleRemove}
+              />
+            ) : (
+              <Spin size="small" />
+            )}
+          </>
         ) : (
           <EditOutlined onClick={handleEditClick} />
         )}
@@ -107,13 +132,11 @@ const UploaderItem = ({
       <Flex>
         <Progress
           showInfo={false}
-          percent={100}
+          percent={progress}
           className={styles.uploaderItemProgress}
-          strokeColor="
-        rgba(127, 86, 217, 1)
-        "
+          strokeColor="rgba(127, 86, 217, 1)"
         />
-        <span>100%</span>
+        <span>{progress}%</span>
       </Flex>
     </Card>
   );
@@ -248,7 +271,7 @@ const KnowledgeUploadFile = () => {
             <Flex align="center" justify="center">
               <SelectFilesStartIcon></SelectFilesStartIcon>
               <Progress
-                percent={100}
+                percent={isUpload ? 0 : 100}
                 showInfo={false}
                 className={styles.progress}
                 strokeColor="

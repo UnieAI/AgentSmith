@@ -66,6 +66,13 @@ const ChatConfigurationModal = ({
 }: IProps) => {
   const [form] = Form.useForm();
 
+  const [width, setWidth] = useState<number>(0);
+  const [height, setHeight] = useState<number>(0);
+  useEffect(() => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+  }, []);
+
   const [value, setValue] = useState<ConfigurationSegmented>(
     ConfigurationSegmented.AssistantSetting,
   );
@@ -149,13 +156,17 @@ const ChatConfigurationModal = ({
   return (
     <Modal
       title={title}
-      width={688}
+      width={width}
       open={visible}
       onOk={handleOk}
       onCancel={handleCancel}
       confirmLoading={loading}
       destroyOnClose
       afterClose={handleModalAfterClose}
+      style={{
+        top:30,
+        overflow: 'hidden',
+      }}
     >
       <Segmented
         size={'large'}
@@ -172,7 +183,11 @@ const ChatConfigurationModal = ({
         {...layout}
         name="nest-messages"
         form={form}
-        style={{ maxWidth: 600 }}
+        style={{ 
+         width:'100%',
+          maxHeight: height*0.6,
+          overflowY: 'auto',
+        }}
         validateMessages={validateMessages}
         colon={false}
       >

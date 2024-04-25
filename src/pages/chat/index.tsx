@@ -4,7 +4,7 @@ import {
   CloudOutlined,
   DeleteOutlined,
   EditOutlined,
-  FormOutlined,
+  // FormOutlined,
 } from '@ant-design/icons';
 import {
   Avatar,
@@ -16,17 +16,17 @@ import {
   MenuProps,
   Space,
   Spin,
-  Tag,
+  // Tag,
 } from 'antd';
 import { MenuItemProps } from 'antd/lib/menu/MenuItem';
 import classNames from 'classnames';
-import { useCallback } from 'react';
+// import { useCallback } from 'react';
 import ChatConfigurationModal from './chat-configuration-modal';
-import ChatContainer from './chat-container';
+// import ChatContainer from './chat-container';
 import {
-  useClickConversationCard,
+  // useClickConversationCard,
   useClickDialogCard,
-  useDeleteConversation,
+  // useDeleteConversation,
   useDeleteDialog,
   useEditDialog,
   useFetchConversationListOnMount,
@@ -34,8 +34,8 @@ import {
   useGetChatSearchParams,
   useHandleItemHover,
   useRenameConversation,
-  useSelectConversationListLoading,
-  useSelectDerivedConversationList,
+  // useSelectConversationListLoading,
+  // useSelectDerivedConversationList,
   useSelectDialogListLoading,
   useSelectFirstDialogOnMount,
 } from './hooks';
@@ -49,25 +49,27 @@ import styles from './index.less';
 const Chat = () => {
   const dialogList = useSelectFirstDialogOnMount();
   const { onRemoveDialog } = useDeleteDialog();
-  const { onRemoveConversation } = useDeleteConversation();
+  // const { onRemoveConversation } = useDeleteConversation();
   const { handleClickDialog } = useClickDialogCard();
-  const { handleClickConversation } = useClickConversationCard();
-  const { dialogId, conversationId } = useGetChatSearchParams();
-  const { list: conversationList, addTemporaryConversation } =
-    useSelectDerivedConversationList();
+  // const { handleClickConversation } = useClickConversationCard();
+  const { dialogId, 
+    // conversationId 
+  } = useGetChatSearchParams();
+  // const { list: conversationList, addTemporaryConversation } =
+  //   useSelectDerivedConversationList();
   const { activated, handleItemEnter, handleItemLeave } = useHandleItemHover();
-  const {
-    activated: conversationActivated,
-    handleItemEnter: handleConversationItemEnter,
-    handleItemLeave: handleConversationItemLeave,
-  } = useHandleItemHover();
+  // const {
+  //   activated: conversationActivated,
+  //   handleItemEnter: handleConversationItemEnter,
+  //   handleItemLeave: handleConversationItemLeave,
+  // } = useHandleItemHover();
   const {
     conversationRenameLoading,
     initialConversationName,
     onConversationRenameOk,
     conversationRenameVisible,
     hideConversationRenameModal,
-    showConversationRenameModal,
+    // showConversationRenameModal,
   } = useRenameConversation();
   const {
     dialogSettingLoading,
@@ -79,7 +81,7 @@ const Chat = () => {
     showDialogEditModal,
   } = useEditDialog();
   const dialogLoading = useSelectDialogListLoading();
-  const conversationLoading = useSelectConversationListLoading();
+  // const conversationLoading = useSelectConversationListLoading();
   const { t } = useTranslate('chat');
   const {
     visible: overviewVisible,
@@ -94,9 +96,9 @@ const Chat = () => {
     handleItemEnter(id);
   };
 
-  const handleConversationCardEnter = (id: string) => () => {
-    handleConversationItemEnter(id);
-  };
+  // const handleConversationCardEnter = (id: string) => () => {
+  //   handleConversationItemEnter(id);
+  // };
 
   const handleShowChatConfigurationModal =
     (dialogId?: string): any =>
@@ -123,46 +125,46 @@ const Chat = () => {
       showOverviewModal();
     };
 
-  const handleRemoveConversation =
-    (conversationId: string): MenuItemProps['onClick'] =>
-    ({ domEvent }) => {
-      domEvent.preventDefault();
-      domEvent.stopPropagation();
-      onRemoveConversation([conversationId]);
-    };
+  // const handleRemoveConversation =
+  //   (conversationId: string): MenuItemProps['onClick'] =>
+  //   ({ domEvent }) => {
+  //     domEvent.preventDefault();
+  //     domEvent.stopPropagation();
+  //     onRemoveConversation([conversationId]);
+  //   };
 
-  const handleShowConversationRenameModal =
-    (conversationId: string): MenuItemProps['onClick'] =>
-    ({ domEvent }) => {
-      domEvent.preventDefault();
-      domEvent.stopPropagation();
-      showConversationRenameModal(conversationId);
-    };
+  // const handleShowConversationRenameModal =
+  //   (conversationId: string): MenuItemProps['onClick'] =>
+  //   ({ domEvent }) => {
+  //     domEvent.preventDefault();
+  //     domEvent.stopPropagation();
+  //     showConversationRenameModal(conversationId);
+  //   };
 
   const handleDialogCardClick = (dialogId: string) => () => {
     handleClickDialog(dialogId);
   };
 
-  const handleConversationCardClick = (dialogId: string) => () => {
-    handleClickConversation(dialogId);
-  };
+  // const handleConversationCardClick = (dialogId: string) => () => {
+  //   handleClickConversation(dialogId);
+  // };
 
-  const handleCreateTemporaryConversation = useCallback(() => {
-    addTemporaryConversation();
-  }, [addTemporaryConversation]);
+  // const handleCreateTemporaryConversation = useCallback(() => {
+  //   addTemporaryConversation();
+  // }, [addTemporaryConversation]);
 
-  const items: MenuProps['items'] = [
-    {
-      key: '1',
-      onClick: handleCreateTemporaryConversation,
-      label: (
-        <Space>
-          <EditOutlined />
-          {t('newChat')}
-        </Space>
-      ),
-    },
-  ];
+  // const items: MenuProps['items'] = [
+  //   {
+  //     key: '1',
+  //     onClick: handleCreateTemporaryConversation,
+  //     label: (
+  //       <Space>
+  //         <EditOutlined />
+  //         {t('newChat')}
+  //       </Space>
+  //     ),
+  //   },
+  // ];
 
   const buildAppItems = (dialog: IDialog) => {
     const dialogId = dialog.id;
@@ -205,33 +207,33 @@ const Chat = () => {
     return appItems;
   };
 
-  const buildConversationItems = (conversationId: string) => {
-    const appItems: MenuProps['items'] = [
-      {
-        key: '1',
-        onClick: handleShowConversationRenameModal(conversationId),
-        label: (
-          <Space>
-            <EditOutlined />
-            {t('rename', { keyPrefix: 'common' })}
-          </Space>
-        ),
-      },
-      { type: 'divider' },
-      {
-        key: '2',
-        onClick: handleRemoveConversation(conversationId),
-        label: (
-          <Space>
-            <DeleteOutlined />
-            {t('delete', { keyPrefix: 'common' })}
-          </Space>
-        ),
-      },
-    ];
+  // const buildConversationItems = (conversationId: string) => {
+  //   const appItems: MenuProps['items'] = [
+  //     {
+  //       key: '1',
+  //       onClick: handleShowConversationRenameModal(conversationId),
+  //       label: (
+  //         <Space>
+  //           <EditOutlined />
+  //           {t('rename', { keyPrefix: 'common' })}
+  //         </Space>
+  //       ),
+  //     },
+  //     { type: 'divider' },
+  //     {
+  //       key: '2',
+  //       onClick: handleRemoveConversation(conversationId),
+  //       label: (
+  //         <Space>
+  //           <DeleteOutlined />
+  //           {t('delete', { keyPrefix: 'common' })}
+  //         </Space>
+  //       ),
+  //     },
+  //   ];
 
-    return appItems;
-  };
+  //   return appItems;
+  // };
 
   useFetchConversationListOnMount();
 
@@ -239,7 +241,9 @@ const Chat = () => {
     <Flex className={styles.chatWrapper}>
       <Flex className={styles.chatAppWrapper}>
         <Flex flex={1} vertical>
-          <Button type="primary" onClick={handleShowChatConfigurationModal()}>
+          <Button type="primary" onClick={handleShowChatConfigurationModal()} style={{
+            maxWidth: '200px'
+          }}>
             {t('createAssistant')}
           </Button>
           <Divider></Divider>
@@ -261,7 +265,7 @@ const Chat = () => {
                       <Avatar src={x.icon} shape={'square'} />
                       <section>
                         <b>{x.name}</b>
-                        <div>{x.description}</div>
+                        {/* <div>{x.description}</div> */}
                       </section>
                     </Space>
                     {activated === x.id && (
@@ -280,8 +284,8 @@ const Chat = () => {
           </Flex>
         </Flex>
       </Flex>
-      <Divider type={'vertical'} className={styles.divider}></Divider>
-      <Flex className={styles.chatTitleWrapper}>
+      {/* <Divider type={'vertical'} className={styles.divider}></Divider> */}
+      {/* <Flex className={styles.chatTitleWrapper}>
         <Flex flex={1} vertical>
           <Flex
             justify={'space-between'}
@@ -332,9 +336,9 @@ const Chat = () => {
             </Spin>
           </Flex>
         </Flex>
-      </Flex>
-      <Divider type={'vertical'} className={styles.divider}></Divider>
-      <ChatContainer></ChatContainer>
+      </Flex> */}
+      {/* <Divider type={'vertical'} className={styles.divider}></Divider>
+      <ChatContainer></ChatContainer> */}
       <ChatConfigurationModal
         visible={dialogEditVisible}
         initialDialog={initialDialog}
