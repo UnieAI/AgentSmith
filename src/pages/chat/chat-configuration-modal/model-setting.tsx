@@ -207,7 +207,7 @@ const ModelSetting = ({ show, form }: ISegmentedContentProps) => {
               noStyle
               rules={[{ required: true, message: t('maxTokensMessage') }]}
             >
-              <Slider className={styles.variableSlider} max={2048} />
+              <Slider className={styles.variableSlider} max={16000} />
             </Form.Item>
           </Flex>
           <Form.Item

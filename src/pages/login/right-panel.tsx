@@ -1,18 +1,18 @@
-import { ReactComponent as Avatars } from '@/assets/svg/login-avatars.svg';
-import SvgIcon from '@/components/svg-icon';
-import { Flex, Rate, Space, Typography } from 'antd';
-import classNames from 'classnames';
+// import { ReactComponent as Avatars } from '@/assets/svg/login-avatars.svg';
+// import SvgIcon from '@/components/svg-icon';
+// import { Flex, Rate, Space, Typography } from 'antd';
+// import classNames from 'classnames';
 
-import { useTranslate } from '@/hooks/commonHooks';
+// import { useTranslate } from '@/hooks/commonHooks';
 import styles from './index.less';
 
-const { Title, Text } = Typography;
+// const { Title, Text } = Typography;
 
 const LoginRightPanel = () => {
-  const { t } = useTranslate('login');
+  // const { t } = useTranslate('login');
   return (
     <section className={styles.rightPanel}>
-      <SvgIcon name="login-star" width={80}></SvgIcon>
+      {/* <SvgIcon name="login-star" width={80}></SvgIcon>
       <Flex vertical gap={40}>
         <Title
           level={1}
@@ -38,8 +38,8 @@ const LoginRightPanel = () => {
               {t('review')}
             </span>
           </Flex>
-        </Flex>
-      </Flex>
+        </Flex> 
+      </Flex>*/}
     </section>
   );
 };
