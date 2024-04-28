@@ -55,7 +55,8 @@ def login():
     user = UserService.query_user(email, password)
     if user:
         response_data = user.to_json()
-        user.access_token = get_uuid()
+        # use same access_token for same user
+        # user.access_token = get_uuid()
         login_user(user)
         user.update_time = current_timestamp(),
         user.update_date = datetime_format(datetime.now()),
