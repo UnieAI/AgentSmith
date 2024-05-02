@@ -103,33 +103,19 @@ def list_convsersation():
 
 @manager.route('/completion', methods=['POST'])
 @login_required
-@validate_request("conversation_id", "messages")
+@validate_request("conversation_id", "messages", "reference")
 def completion():
     req = request.json
-    msg = []
-    for m in req["messages"]:
-        if m["role"] == "system":
-            continue
-        if m["role"] == "assistant" and not msg:
-            continue
-        msg.append({"role": m["role"], "content": m["content"]})
     try:
         e, conv = ConversationService.get_by_id(req["conversation_id"])
         if not e:
             return get_data_error_result(retmsg="Conversation not found!")
         conv.message.append(msg[-1])
-        e, dia = DialogService.get_by_id(conv.dialog_id)
-        if not e:
-            return get_data_error_result(retmsg="Dialog not found!")
-        del req["conversation_id"]
-        del req["messages"]
-        ans = chat(dia, msg, **req)
         if not conv.reference:
             conv.reference = []
-        conv.reference.append(ans["reference"])
-        conv.message.append({"role": "assistant", "content": ans["answer"]})
-        ConversationService.update_by_id(conv.id, conv.to_dict())
-        return get_json_result(data=ans)
+        conv.reference.append(req["reference"])
+        ConversationService.update_by_id(conv.id, req["messages"])
+        return get_json_result(data=req["reference"])
     except Exception as e:
         return server_error_response(e)
 
