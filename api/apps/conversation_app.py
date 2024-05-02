@@ -110,12 +110,12 @@ def completion():
         e, conv = ConversationService.get_by_id(req["conversation_id"])
         if not e:
             return get_data_error_result(retmsg="Conversation not found!")
-        conv.message.append(msg[-1])
         if not conv.reference:
             conv.reference = []
         conv.reference.append(req["reference"])
-        ConversationService.update_by_id(conv.id, req["messages"])
-        return get_json_result(data=req["reference"])
+        conv.message = req["messages"]
+        ConversationService.update_by_id(conv.id, conv.to_dict())
+        return get_json_result()
     except Exception as e:
         return server_error_response(e)
 
