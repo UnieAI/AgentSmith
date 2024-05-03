@@ -1,12 +1,12 @@
-import { useLogout } from '@/hooks/userSettingHook';
-
+import React from 'react';
 const Logout = () => {
-  const logout = useLogout();
-  logout();
+  React.useEffect(() => {
+    localStorage.removeItem('Authorization');
+    window.location.href = '/';
+  }, []);
 
   return (
     <div>
-      <h1>Logout</h1>
     </div>
   );
 };
