@@ -5,6 +5,10 @@ const routes = [
     layout: false,
   },
   {
+    path: '/logout',
+    component: '@/pages/logout',
+  },
+  {
     path: '/chat/share',
     component: '@/pages/chat/share',
     layout: false,
