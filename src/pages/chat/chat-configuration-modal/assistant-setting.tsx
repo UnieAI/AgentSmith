@@ -98,7 +98,7 @@ const AssistantSetting = ({ show }: ISegmentedContentProps) => {
         tooltip={t('knowledgeBasesTip')}
         rules={[
           {
-            required: true,
+            // required: true,
             message: t('knowledgeBasesMessage'),
             type: 'array',
           },

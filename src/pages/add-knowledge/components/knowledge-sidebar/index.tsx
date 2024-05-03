@@ -99,15 +99,15 @@ const KnowledgeSidebar = () => {
   return (
     <div className={styles.sidebarWrapper}>
       <div className={styles.sidebarTop}>
-        <Space size={8} direction="vertical">
+        {/* <Space size={8} direction="vertical">
           <Avatar size={64} src={knowledgeDetails.avatar} />
           <div className={styles.knowledgeTitle}>{knowledgeDetails.name}</div>
-        </Space>
+        </Space> */}
         <p className={styles.knowledgeDescription}>
           {knowledgeDetails.description}
         </p>
       </div>
-      <div className={styles.divider}></div>
+      {/* <div className={styles.divider}></div> */}
       <div className={styles.menuWrapper}>
         <Menu
           selectedKeys={[activeKey]}

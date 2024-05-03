@@ -1,6 +1,6 @@
 import ModalManager from '@/components/modal-manager';
 import { useFetchKnowledgeList } from '@/hooks/knowledgeHook';
-import { useSelectUserInfo } from '@/hooks/userSettingHook';
+// import { useSelectUserInfo } from '@/hooks/userSettingHook';
 import { PlusOutlined } from '@ant-design/icons';
 import { Button, Empty, Flex, Space, Spin } from 'antd';
 import KnowledgeCard from './knowledge-card';
@@ -11,17 +11,17 @@ import styles from './index.less';
 
 const Knowledge = () => {
   const { list, loading } = useFetchKnowledgeList();
-  const userInfo = useSelectUserInfo();
+  // const userInfo = useSelectUserInfo();
   const { t } = useTranslation('translation', { keyPrefix: 'knowledgeList' });
 
   return (
     <Flex className={styles.knowledge} vertical flex={1}>
       <div className={styles.topWrapper}>
         <div>
-          <span className={styles.title}>
+          {/* <span className={styles.title}>
             {t('welcome')}, {userInfo.nickname}
           </span>
-          <p className={styles.description}>{t('description')}</p>
+          <p className={styles.description}>{t('description')}</p> */}
         </div>
         <Space size={'large'}>
           {/* <Button icon={<FilterIcon />} className={styles.filterButton}>

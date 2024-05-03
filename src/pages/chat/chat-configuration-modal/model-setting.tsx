@@ -50,7 +50,9 @@ const ModelSetting = ({ show, form }: ISegmentedContentProps) => {
         label={t('model')}
         name="llm_id"
         tooltip={t('modelTip')}
-        rules={[{ required: true, message: t('modelMessage') }]}
+        rules={[{
+          // required: true,
+          message: t('modelMessage') }]}
       >
         <Select options={modelOptions} showSearch />
       </Form.Item>

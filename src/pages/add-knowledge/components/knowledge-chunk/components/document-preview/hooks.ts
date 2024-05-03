@@ -48,7 +48,9 @@ export const useGetDocumentUrl = () => {
   const { documentId } = useGetKnowledgeSearchParams();
 
   const url = useMemo(() => {
+    console.log(`${api_host}/document/get/${documentId}`)
     return `${api_host}/document/get/${documentId}`;
+    
   }, [documentId]);
 
   return url;
