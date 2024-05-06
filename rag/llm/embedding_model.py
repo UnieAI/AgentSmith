@@ -65,13 +65,14 @@ class HuggingFaceInstructEmbedding(Base):
         arr = []
         tks_num = 0
         for txt in texts:
+            print(txt)
             res = self.embeddings.embed_query(txt)
+            print(res)
             arr.append(res)
             tks_num += 512
         return np.array(arr), tks_num
 
     def encode_queries(self, text: str):
-        token_count = num_tokens_from_string(text)
         return np.array(self.embeddings.embed_query(text)), 512
 
 
