@@ -72,7 +72,7 @@ class HuggingFaceInstructEmbedding(Base):
 
     def encode_queries(self, text: str):
         token_count = num_tokens_from_string(text)
-        return self.embeddings.embed_query(text), 512
+        return np.array(self.embeddings.embed_query(text)), 512
 
 
 class HuEmbedding(Base):
