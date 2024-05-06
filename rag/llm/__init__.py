@@ -25,7 +25,8 @@ EmbeddingModel = {
     "Tongyi-Qianwen": HuEmbedding, #QWenEmbed,
     "ZHIPU-AI": ZhipuEmbed,
     "FastEmbed": FastEmbed,
-    "QAnything": QAnythingEmbed
+    "QAnything": QAnythingEmbed,
+    "UnieAI": HuggingFaceInstructEmbedding
 }
 
 
