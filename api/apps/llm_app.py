@@ -195,7 +195,6 @@ def list():
             res[m["fid"]].append(m)
 
         # ------------------------ UnieAI -----------------------
-        res['UnieAI'] = []
         models = requests.get("https://router.spearlink.seal3.io/v1/models").json()['data']
         for model in models:
             worker_addr = requests.post(
