@@ -135,4 +135,5 @@ yarl==1.9.4
 zhipuai==2.0.1
 BCEmbedding
 loguru==0.7.2
-langchain_community==0.0.36
+langchain_community==0.0.24
+InstructorEmbedding==1.0.1
