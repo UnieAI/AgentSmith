@@ -58,7 +58,7 @@ class Base(ABC):
 
 
 class HuggingFaceInstructEmbedding(Base):
-    def __init__(self, *args, **kwargs, model_name="GanymedeNil/text2vec-large-chinese"):
+    def __init__(self, model_name="GanymedeNil/text2vec-large-chinese", *args, **kwargs):
        self.embeddings = HuggingFaceInstructEmbeddings(model_name=model_name)
 
     def encode(self, texts: list, batch_size=32):
