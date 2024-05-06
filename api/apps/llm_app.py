@@ -178,7 +178,7 @@ def list():
         llms = [m.to_dict()
                 for m in llms if m.status == StatusEnum.VALID.value]
         for m in llms:
-            m["available"] = m["fid"] in facts or m["llm_name"].lower() == "flag-embedding" or m["fid"] in ["QAnything","FastEmbed"]
+            m["available"] = m["fid"] in facts or m["llm_name"].lower() == "flag-embedding" or m["fid"] in ["QAnything","FastEmbed","UnieAI"]
 
         llm_set = set([m["llm_name"] for m in llms])
         for o in objs:
