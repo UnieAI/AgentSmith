@@ -124,6 +124,11 @@ factory_infos = [{
     "logo": "",
     "tags": "LLM,TEXT EMBEDDING,SPEECH2TEXT,MODERATION",
         "status": "1",
+},{
+    "name": "UnieAi",
+    "logo": "",
+    "tags": "LLM,TEXT EMBEDDING,SPEECH2TEXT,MODERATION",
+    "status": "1",
 },
     # {
     #     "name": "文心一言",
@@ -327,6 +332,14 @@ def init_llm_factory():
         {
             "fid": factory_infos[7]["name"],
             "llm_name": "maidalun1020/bce-embedding-base_v1",
+            "tags": "TEXT EMBEDDING,",
+            "max_tokens": 512,
+            "model_type": LLMType.EMBEDDING.value
+        },
+        # ------------------------ UnieAi -----------------------
+        {
+            "fid": factory_infos[8]["name"],
+            "llm_name": "GanymedeNil/text2vec-large-chinese",
             "tags": "TEXT EMBEDDING,",
             "max_tokens": 512,
             "model_type": LLMType.EMBEDDING.value
