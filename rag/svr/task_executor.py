@@ -234,6 +234,7 @@ def embedding(docs, mdl, parser_config={}, callback=None):
     vects = (title_w * tts + (1 - title_w) *
              cnts) if len(tts) == len(cnts) else cnts
 
+    print(len(vects), len(docs))
     assert len(vects) == len(docs)
     for i, d in enumerate(docs):
         v = vects[i].tolist()
@@ -281,7 +282,6 @@ def main(comm, mod):
             tk_count = embedding(cks, embd_mdl, r["parser_config"], callback)
         except Exception as e:
             callback(-1, "Embedding error:{}".format(str(e)))
-            print(str(e))
             cron_logger.error(str(e))
             tk_count = 0
         cron_logger.info("Embedding elapsed({}): {}".format(r["name"], timer()-st))
