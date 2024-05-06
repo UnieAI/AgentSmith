@@ -281,6 +281,7 @@ def main(comm, mod):
             tk_count = embedding(cks, embd_mdl, r["parser_config"], callback)
         except Exception as e:
             callback(-1, "Embedding error:{}".format(str(e)))
+            print(str(e))
             cron_logger.error(str(e))
             tk_count = 0
         cron_logger.info("Embedding elapsed({}): {}".format(r["name"], timer()-st))
