@@ -59,7 +59,7 @@ class Base(ABC):
 
 class HuggingFaceInstructEmbedding(Base):
     def __init__(self, model_name="GanymedeNil/text2vec-large-chinese", *args, **kwargs):
-       self.embeddings = HuggingFaceInstructEmbeddings(model_name=model_name, model_kwargs={"device": "cpu"})
+       self.embeddings = HuggingFaceInstructEmbeddings(model_name=model_name, model_kwargs={"device": "cuda"})
 
     def encode(self, texts: list, batch_size=32):
         arr = []
