@@ -125,7 +125,7 @@ factory_infos = [{
     "tags": "LLM,TEXT EMBEDDING,SPEECH2TEXT,MODERATION",
         "status": "1",
 },{
-    "name": "UnieAi",
+    "name": "UnieAI",
     "logo": "",
     "tags": "LLM,TEXT EMBEDDING,SPEECH2TEXT,MODERATION",
     "status": "1",
