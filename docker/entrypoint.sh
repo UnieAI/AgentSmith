@@ -16,7 +16,7 @@ function watch_broker(){
   while [ 1 -eq 1 ];do
     C=`ps aux|grep "task_broker.py"|grep -v grep|wc -l`;
     if [ $C -lt 1 ];then
-       $PY rag/svr/task_broker.py > rag/svr/task_broker.log &
+       $PY rag/svr/task_broker.py &> rag/svr/task_broker.log &
     fi
     sleep 5;
   done
@@ -31,7 +31,7 @@ task_bro &
 WS=1
 for ((i=0;i<WS;i++))
 do
-  task_exe $i $WS > rag/svr/task_executor$i.log &
+  task_exe $i $WS &> rag/svr/task_executor$i.log &
 done
 
 $PY api/ragflow_server.py
