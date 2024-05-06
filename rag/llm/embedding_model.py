@@ -15,6 +15,7 @@
 #
 from typing import Optional
 
+from langchain_community.embeddings import HuggingFaceInstructEmbeddings
 from huggingface_hub import snapshot_download
 from zhipuai import ZhipuAI
 import os
@@ -54,6 +55,24 @@ class Base(ABC):
 
     def encode_queries(self, text: str):
         raise NotImplementedError("Please implement encode method!")
+
+
+class HuggingFaceInstructEmbedding(Base):
+    def __init__(self, *args, **kwargs, model_name="GanymedeNil/text2vec-large-chinese"):
+       self.embeddings = HuggingFaceInstructEmbeddings(model_name=model_name)
+
+    def encode(self, texts: list, batch_size=32):
+        arr = []
+        tks_num = 0
+        for txt in texts:
+            res = self.instructor_embeddings.embed_query(txt)
+            arr.append(res)
+            tks_num += 512
+        return np.array(arr), tks_num
+
+    def encode_queries(self, text: str):
+        token_count = num_tokens_from_string(text)
+        return self.instructor_embeddings.embed_query(text), 512
 
 
 class HuEmbedding(Base):
