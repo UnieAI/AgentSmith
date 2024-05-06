@@ -59,18 +59,20 @@ class Base(ABC):
 
 class HuggingFaceInstructEmbedding(Base):
     def __init__(self, model_name="GanymedeNil/text2vec-large-chinese", *args, **kwargs):
-       self.embeddings = HuggingFaceInstructEmbeddings(model_name=model_name, model_kwargs={"device": "cuda"})
+       self.embeddings = HuggingFaceInstructEmbeddings(model_name=model_name)
 
     def encode(self, texts: list, batch_size=32):
+        embeddings = HuggingFaceInstructEmbeddings(model_name="GanymedeNil/text2vec-large-chinese")
         arr = []
         tks_num = 0
         for text in texts:
-            res = self.embeddings.embed_query(text)
+            res = embeddings.embed_query(text)
             arr.append(res)
             tks_num += num_tokens_from_string(text)
         return np.array(arr), tks_num
 
     def encode_queries(self, text: str):
+        embeddings = HuggingFaceInstructEmbeddings(model_name="GanymedeNil/text2vec-large-chinese")
         return np.array(self.embeddings.embed_query(text)), num_tokens_from_string(text)
 
 
