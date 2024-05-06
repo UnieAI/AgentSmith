@@ -18,7 +18,7 @@ ADD docker/entrypoint.sh ./entrypoint.sh
 
 ADD requirements.txt requirements.txt
 
-RUN pip install -r requirements.txt
+RUN /root/miniconda3/envs/py11/bin/python -m pip install -r requirements.txt
 
 RUN chmod +x ./entrypoint.sh
 
