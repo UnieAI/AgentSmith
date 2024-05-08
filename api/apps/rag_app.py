@@ -68,7 +68,7 @@ def rrf(match_res, knn_res):
 
 def search(index, kb_ids, query, size = 10, from_ = 0, hightlight = False):
     if not ELASTICSEARCH.indexExist(idxnm=index):
-        return get_data_error_result(retmsg=f"Index with name: {index} does not exist")
+        return f"Index with name: {index} does not exist"
         
     match_res = ELASTICSEARCH.search(
                 idxnm=index,
