@@ -133,7 +133,7 @@ def rag():
         if m["role"] == "system":
             system = m["content"]
             continue
-        if m["role"] == "assistant" and not msg:
+        if m["role"] == "assistant":
             continue
         query = m["content"]
 
