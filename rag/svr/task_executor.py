@@ -282,7 +282,6 @@ def main(comm, mod):
             len(cks))
         st = timer()
 
-        tk_count = embedding(cks, embd_mdl, r["parser_config"], callback)
         try:
             tk_count = embedding(cks, embd_mdl, r["parser_config"], callback)
         except Exception as e:
