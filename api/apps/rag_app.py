@@ -114,6 +114,7 @@ def search(index, kb_ids, query, size = 10, from_ = 0, hightlight = False):
                     "from": from_,
                     "size": size
                 }
+            )
 
     merged_results = rrf(match_res, knn_res)
     return merged_results
