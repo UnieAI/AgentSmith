@@ -212,7 +212,8 @@ def embedding(docs, mdl, parser_config={}, callback=None):
         for i in range(0, len(tts), batch_size):
             vts, c = mdl.encode(tts[i: i + batch_size])
             if len(tts_) == 0:
-                tts_ = vts
+                tts_ = vts                
+                print(len(vts))
             else:
                 tts_ = np.concatenate((tts_, vts), axis=0)
             tk_count += c
@@ -224,6 +225,7 @@ def embedding(docs, mdl, parser_config={}, callback=None):
         vts, c = mdl.encode(cnts[i: i + batch_size])
         if len(cnts_) == 0:
             cnts_ = vts
+            print(len(vts))
         else:
             cnts_ = np.concatenate((cnts_, vts), axis=0)
         tk_count += c
@@ -238,6 +240,7 @@ def embedding(docs, mdl, parser_config={}, callback=None):
     assert len(vects) == len(docs)
     for i, d in enumerate(docs):
         v = vects[i].tolist()
+        print(len(v))
         d["q_%d_vec" % len(v)] = v
     return tk_count
 
