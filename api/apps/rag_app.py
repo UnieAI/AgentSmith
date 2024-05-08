@@ -67,11 +67,12 @@ def rrf(match_res, knn_res):
     return final_response
 
 def search(index, kb_ids, query, size = 10, from_ = 0, hightlight = False):
-    if not ELASTICSEARCH.indexExist(idxnm=index):
-        return f"Index with name: {index} does not exist"
+    idxnm = f"ragflow_{index}"
+    if not ELASTICSEARCH.indexExist(idxnm=idxnm):
+        return f"Index with name: {idxnm} does not exist"
         
     match_res = ELASTICSEARCH.search(
-                idxnm=index,
+                idxnm=f"{idxnm}",
                 q={
                     "query": {
                         "bool": {
@@ -94,7 +95,7 @@ def search(index, kb_ids, query, size = 10, from_ = 0, hightlight = False):
             )
     
     knn_res = ELASTICSEARCH.search(
-                idxnm=index,
+                idxnm=idxnm,
                 q={
                     "query": {
                         "bool": {
