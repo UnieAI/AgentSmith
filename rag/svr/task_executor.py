@@ -213,7 +213,7 @@ def embedding(docs, mdl, parser_config={}, callback=None):
             vts, c = mdl.encode(tts[i: i + batch_size])
             if len(tts_) == 0:
                 tts_ = vts                
-                print(len(vts))
+                cron_logger.error(len(vts))
             else:
                 tts_ = np.concatenate((tts_, vts), axis=0)
             tk_count += c
@@ -225,7 +225,7 @@ def embedding(docs, mdl, parser_config={}, callback=None):
         vts, c = mdl.encode(cnts[i: i + batch_size])
         if len(cnts_) == 0:
             cnts_ = vts
-            print(len(vts))
+            cron_logger.error(len(vts))
         else:
             cnts_ = np.concatenate((cnts_, vts), axis=0)
         tk_count += c
@@ -236,11 +236,11 @@ def embedding(docs, mdl, parser_config={}, callback=None):
     vects = (title_w * tts + (1 - title_w) *
              cnts) if len(tts) == len(cnts) else cnts
 
-    print(len(vects), len(docs))
+    cron_logger.error(len(vects), len(docs))
     assert len(vects) == len(docs)
     for i, d in enumerate(docs):
         v = vects[i].tolist()
-        print(len(v))
+        cron_logger.error(len(v))
         d["q_%d_vec" % len(v)] = v
     return tk_count
 
