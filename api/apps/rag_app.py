@@ -98,7 +98,7 @@ def search(index, kb_ids, query, size = 10, from_ = 0, hightlight = False):
                 idxnm=idxnm,
                 q={
                     "knn": {
-                        "field": "q_768_vec",
+                        "field": "q_1024_vec",
                         "query_vector": hardCodeEmbeddings.embed_query(query), 
                         "k": 10,
                         "num_candidates": 50,
