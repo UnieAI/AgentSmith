@@ -73,7 +73,7 @@ class HuggingFaceInstructEmbedding(Base):
 
     def encode_queries(self, text: str):
         embeddings = HuggingFaceInstructEmbeddings(model_name="GanymedeNil/text2vec-large-chinese")
-        return np.array(self.embeddings.embed_query(text)), num_tokens_from_string(text)
+        return np.array(embeddings.embed_query(text)), num_tokens_from_string(text)
 
 
 class HuEmbedding(Base):
