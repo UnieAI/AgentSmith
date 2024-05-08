@@ -102,14 +102,10 @@ def search(index, kb_ids, query, size = 10, from_ = 0, hightlight = False):
                         "query_vector": hardCodeEmbeddings.embed_query(query), 
                         "k": 10,
                         "num_candidates": 50,
-                        "boost": 0.1
-                    },
-                    "query": {
-                        "bool": {
-                            "filter": [
-                                {"terms": {"kb_id": kb_ids}}
-                            ]
-                        }
+                        "boost": 0.1,
+                        "filter": [
+                            {"terms": {"kb_id": kb_ids}}
+                        ]
                     },
                     "from": from_,
                     "size": size
