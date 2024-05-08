@@ -91,7 +91,8 @@ def search(index, kb_ids, query, size = 10, from_ = 0, hightlight = False):
                         "pre_tags": "<mark>",
                         "post_tags": "</mark>",
                     }
-                }
+                },
+                src=True
             )
     
     knn_res = ELASTICSEARCH.search(
@@ -109,7 +110,8 @@ def search(index, kb_ids, query, size = 10, from_ = 0, hightlight = False):
                     },
                     "from": from_,
                     "size": size
-                }
+                },
+                src=True
             )
 
     merged_results = rrf(match_res, knn_res)
