@@ -147,7 +147,7 @@ def rag():
         if not e:
             return get_data_error_result(retmsg="Dialog not found!")
             
-        ref = search(dialog.tenant_id, dialog.kb_ids, query)
+        ref = search(dia.tenant_id, dia.kb_ids, query)
 
         return get_json_result(data=ref)
     except Exception as e:
