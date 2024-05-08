@@ -102,7 +102,7 @@ def search(index, kb_ids, query, size = 10, from_ = 0, hightlight = False):
                         "must": {
                             "knn": {
                                 "field": "q_768_vec",
-                                "query_vector": instructor_embeddings.embed_query(query), 
+                                "query_vector": hardCodeEmbeddings.embed_query(query), 
                                 "k": 10,
                                 "num_candidates": 50,
                                 "boost": 0.1
