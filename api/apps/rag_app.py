@@ -70,9 +70,9 @@ def search(index, kb_ids, query, size = 10, from_ = 0, hightlight = False):
     if not es.indices.exists(index=index):
         return get_data_error_result(retmsg=f"Index with name: {index} does not exist")
         
-    match_res = es.search(
-                index=index,
-                body={
+    match_res = ELASTICSEARCH.search(
+                idxnm=index,
+                q={
                     "query": {
                         "bool": {
                             "must": [
@@ -93,9 +93,9 @@ def search(index, kb_ids, query, size = 10, from_ = 0, hightlight = False):
                 }
             )
     
-    knn_res = es.search(
-                index=index,
-                body={
+    knn_res = ELASTICSEARCH.search(
+                idxnm=index,
+                q={
                     "query": {
                         "bool": {
                             "must": [
