@@ -40,7 +40,7 @@ def reciprocal_rank_fusion(results_a, results_b):
     # 新增代码：过滤出每个 hash 值对应的最高分数的记录
     hash_to_best_doc = {}
     for doc in combined_results:
-        doc_hash = doc['_source']['metadata']['hash']
+        doc_hash = doc['_id']
         if doc_hash not in hash_to_best_doc or hash_to_best_doc[doc_hash]['rrf_score'] > doc['rrf_score']:
             hash_to_best_doc[doc_hash] = doc
     
