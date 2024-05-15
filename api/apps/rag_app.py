@@ -128,13 +128,15 @@ def rag():
 
     system = None
     query = None
-
+    
+    msg = []
     for m in req["messages"]:
         if m["role"] == "system":
             system = m["content"]
             continue
         if m["role"] == "assistant":
             continue
+        msg.append({"role": m["role"], "content": m["content"]})
         query = m["content"]
 
     try:
@@ -142,7 +144,8 @@ def rag():
         if not e:
             return get_data_error_result(retmsg="Dialog not found!")
             
-        ref = search(dia.tenant_id, dia.kb_ids, query)
+        del req["messages"]
+        ref = use_retrival(dia, msg, **req)
 
         return get_json_result(data=ref)
     except Exception as e:
